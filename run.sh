@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "WSL UBUNTU CONFIGURATION SCRIPT"
