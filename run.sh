@@ -27,7 +27,7 @@ fetch_and_run() {
     cd "$temp_dir" || die "Failed to change directory to $temp_dir."
 
     echo "[INFO] Running configure.sh..."
-    if [[ -x configure.sh ]]; then
+    if [[ -f configure.sh ]]; then
         bash configure.sh || die "Error occurred while executing configure.sh."
     else
         die "configure.sh is not executable or not found."
