@@ -21,4 +21,6 @@
     - include_tasks: tasks/01-core-tools.yaml
     - include_tasks: tasks/02-nvim.yaml
     - include_tasks: tasks/03-zsh.yaml
+
+    - include_tasks: tasks/99-dotfiles.yaml
     
