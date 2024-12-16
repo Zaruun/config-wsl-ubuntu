@@ -23,7 +23,7 @@ else
     local repo_url="https://github.com/Zaruun/dotfiles"
     local dir="~/dotfiles"
     echo "[INFO] Cloning repository from $repo_url to $dir..."
-    git clone "$repo_url" "$temp_dir" || die "Failed to clone repository."
+    git clone "$repo_url" "$dir" || die "Failed to clone repository."
 
     echo "[INFO] Changing directory to $dir..."
     cd "$dir" || die "Failed to change directory to $dir."
