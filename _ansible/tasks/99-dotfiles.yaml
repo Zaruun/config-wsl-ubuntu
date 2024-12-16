@@ -1,0 +1,10 @@
+- name: Check if /home/{{ current_user.stdout }}/dotfiles directory exist
+  stat:
+    path: "/home/{{ current_user.stdout }}/dotfiles"
+  register: dotfiles_stats
+
+- name: Clone dotfiles repo
+  git:
+    repo: https://github.com/Zaruun/dotfiles
+    dest: "/home/{{ current_user.stdout }}/dotfiles"
+  when: dorfiles.stat.exists == False
