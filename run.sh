@@ -35,7 +35,7 @@ fetch_and_run() {
 }
 
 # Main script execution
-trap 'cleanup; exit 1' ERR  # Ensure cleanup on script exit
+trap cleanup EXIT  # Ensure cleanup on script exit
 fetch_and_run
 
 # End of script
