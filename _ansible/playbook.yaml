@@ -1,0 +1,22 @@
+---
+- name: Configure my personal environment
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Retrieve current user
+      command: whoami
+      register: current_user
+      tags:
+      - core
+
+    - name: Update packages
+      become: true
+      apt:
+        update_cache: yes
+        upgrade: yes
+      tags:
+      - core
+
+    - include: tasks/01-core-tools.yaml
+    

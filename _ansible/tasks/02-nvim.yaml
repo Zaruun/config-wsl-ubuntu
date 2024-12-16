@@ -1,0 +1,42 @@
+- name: Check if nvim is installed
+  stat:
+    path: "/usr/bin/nvim"
+  register: nvim_stats
+
+- name: Clone nvim repo
+  git:
+    repo: https://github.com/neovim/neovim
+    dest: /tmp/neovim
+  when: nvim_stats.stat.exists == False
+
+- name: Build nvim
+  become: true
+  command: "make CMAKE_BUILD_TYPE=RelWithDebInfo"
+  args:
+    chdir: /tmp/neovim
+  when: nvim_stats.stat.exists == False
+
+- name: Create DEB package
+  become: true
+  command: "cpack -G DEB"
+  args:
+    chdir: /tmp/neovim/build
+  when: nvim_stats.stat.exists == False
+
+- name: Install nvim package
+  become: true
+  apt:
+    deb: "/tmp/neovim/build/nvim-linux64.deb"
+  when: nvim_stats.stat.exists == False
+
+- name: Clean up nvim build files 1
+  become: true
+  file:
+    path: "/tmp/neovim"
+    state: absent
+
+- name: Clean up nvim build files 2
+  become: true
+  file:
+    path: "/tmp/nvim.root"
+    state: absent

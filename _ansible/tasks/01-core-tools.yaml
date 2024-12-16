@@ -1,0 +1,28 @@
+- name: Install core tools
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - curl
+    - htop
+    - wget
+    - tmux
+    - build-essential
+    - git
+    - cmake
+    - make
+    - clang
+    - gcc 
+    - ninja-build
+    - gettext
+    - unzip
+    - sshfs
+    - bat
+    - ripgrep
+    - zoxide
+    - xclip
+    - ranger
+    - fzf
+  tags:
+  - core
