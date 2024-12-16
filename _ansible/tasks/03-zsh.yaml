@@ -1,0 +1,27 @@
+- name: Install Zsh 
+  become: true
+  apt:
+    name: zsh
+    state: present
+
+- name: Replace default shell for root
+  become: true
+  user:
+    name: root
+    shell: /bin/zsh
+  
+- name: Replace default shell for {{ current_user.stdout }}
+  become: true
+  user:
+    name: "{{ current_user.stdout }}"
+    shell: /bin/zsh
+  
+- name: Check that the .oh-my-zsh exists
+  stat:
+    path: "/home/{{ current_user.stdout }}/.oh-my-zsh"
+  register: oh_my_stats
+
+- name: Install Oh-My-Zsh
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  when: oh_my_stats.stat.exists == False
+  become_user: "{{ current_user.stdout }}"
