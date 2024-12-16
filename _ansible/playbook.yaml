@@ -18,5 +18,6 @@
       tags:
       - core
 
-    - include: tasks/01-core-tools.yaml
+    - include_tasks: tasks/01-core-tools.yaml
+    - include_tasks: tasks/02-nvim.yaml
     
