@@ -20,8 +20,8 @@ ansible-playbook -i localhost _ansible/playbook.yaml --ask-become-pass
 if [[ -d ~/dotfiles ]]; then
     echo "[INFO] dotfiles directory already exist."
 else
-    local repo_url="https://github.com/Zaruun/dotfiles"
-    local dir="~/dotfiles"
+    repo_url="https://github.com/Zaruun/dotfiles"
+    dir="~/dotfiles"
     echo "[INFO] Cloning repository from $repo_url to $dir..."
     git clone "$repo_url" "$dir" || die "Failed to clone repository."
 
