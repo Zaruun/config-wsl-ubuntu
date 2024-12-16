@@ -1,12 +1,25 @@
-- name: Check if asdf is installed
-  stat:
-    path: "/home/{{ current_user.stdout }}/.asdf"
-  register: asdf_stats
+# - name: Check if asdf is installed
+#   stat:
+#     path: "/home/{{ current_user.stdout }}/.asdf"
+#   register: asdf_stats
 
-- name: Clone asdf repo
-  git:
-    repo: https://github.com/asdf-vm/asdf.git
-    dest: "/home/{{ current_user.stdout }}/.asdf"
-    version: v0.14.1
-  when: asdf_stats.stat.exists == False
+# - name: Clone asdf repo
+#   git:
+#     repo: https://github.com/asdf-vm/asdf.git
+#     dest: "/home/{{ current_user.stdout }}/.asdf"
+#     version: v0.14.1
+#   when: asdf_stats.stat.exists == False
 
+- name: install asdf
+  become: true
+  vars:
+    asdf_version: v0.6.2
+    asdf_user: ci
+    asdf_plugins:
+      - name: erlang
+      - name: elixir
+      - name: nodejs
+        versions: ["8.11.3"]
+        global: "8.11.3"
+  roles:
+    - asdf
