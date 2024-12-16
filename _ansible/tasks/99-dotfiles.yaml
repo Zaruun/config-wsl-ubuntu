@@ -7,4 +7,4 @@
   git:
     repo: https://github.com/Zaruun/dotfiles
     dest: "/home/{{ current_user.stdout }}/dotfiles"
-  when: dotfiles.stat.exists == False
+  when: dotfiles_stats.stat.exists == False
