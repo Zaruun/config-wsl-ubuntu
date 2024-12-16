@@ -14,6 +14,6 @@ else
 fi
 
 # Start ansible configuration playbook
-ansible-galaxy install -r _ansible/requirements.yml
+ansible-galaxy install -r _ansible/requirements.yaml
 ansible-playbook -i localhost _ansible/playbook.yaml --ask-become-pass
 
