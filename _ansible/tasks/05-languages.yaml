@@ -1,30 +1,11 @@
-# - name: Check if asdf is installed
-#   stat:
-#     path: "/home/{{ current_user.stdout }}/.asdf"
-#   register: asdf_stats
+- name: Check if asdf is installed
+  stat:
+    path: "/home/{{ current_user.stdout }}/.asdf"
+  register: asdf_stats
 
-# - name: Clone asdf repo
-#   git:
-#     repo: https://github.com/asdf-vm/asdf.git
-#     dest: "/home/{{ current_user.stdout }}/.asdf"
-#     version: v0.14.1
-#   when: asdf_stats.stat.exists == False
-
-- name: Install ASDF and manage plugins
-  become: true
-  roles:
-    - role: cimon-io.asdf
-      vars:
-        asdf_version: v0.12.0  # Specify the ASDF version to install
-        asdf_user: "{{ ansible_user }}"  # Defaults to the current user
-        asdf_plugins:
-          - name: nodejs
-            versions:
-              - 16.19.1
-              - 18.15.0
-            global: 16.19.1
-          - name: python
-            versions:
-              - 3.11.5
-            global: 3.11.5
-        asdf_install_plugins: true
+- name: Clone asdf repo
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: "/home/{{ current_user.stdout }}/.asdf"
+    version: v0.14.1
+  when: asdf_stats.stat.exists == False

@@ -1,3 +1,8 @@
+- name: Install cargo
+  apt:
+    name: cargo
+    state: present
+
 - name: Check if LSD-rs is installed
   stat:
     path: "/usr/bin/lsd"
