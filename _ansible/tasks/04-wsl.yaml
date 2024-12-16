@@ -1,0 +1,16 @@
+- name: Add WSL Utilities repository
+  become: true
+  apt_repository:
+    repo: 'ppa:wslutilities/wslu'
+    state: present
+
+- name: Update apt cache
+  become: true
+  apt:
+    update_cache: yes
+
+- name: Install wslu
+  become: true
+  apt:
+    name: wslu
+    state: present
