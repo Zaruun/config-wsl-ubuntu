@@ -25,5 +25,6 @@
     - xclip
     - ranger
     - fzf
+    - cargo
   tags:
   - core
