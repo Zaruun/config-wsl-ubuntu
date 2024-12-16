@@ -26,5 +26,6 @@
     - ranger
     - fzf
     - cargo
+    - python3.12-venv
   tags:
   - core
