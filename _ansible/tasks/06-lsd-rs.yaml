@@ -1,0 +1,22 @@
+- name: Check if LSD-rs is installed
+  stat:
+    path: "/usr/bin/lsd"
+  register: lsd_stats
+
+- name: Build LSD-rs ( ls replacment )
+  ansible.builtin.command: cargo install lsd
+  when: lsd_stats.stat.exists == False
+
+- name: Copy LSD-rs to /usr/bin/
+  become: true
+  copy:
+    src: "/home/{{ current_user.stdout }}/.cargo/bin/lsd"
+    dest: "/usr/bin/lsd"
+    mode: a+x
+  when: lsd_stats.stat.exists == False
+
+- name: Clean up LSD-rs install files
+  file:
+    path: "/home/{{ current_user.stdout }}/.cargo/bin/lsd"
+    state: absent
+  when: lsd_stats.stat.exists == False
