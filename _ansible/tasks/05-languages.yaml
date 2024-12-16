@@ -1,12 +1,21 @@
-- name: Check if asdf is installed
-  stat:
-    path: "/home/{{ current_user.stdout }}/.asdf"
-  register: asdf_stats
+# - name: Check if asdf is installed
+#   stat:
+#     path: "/home/{{ current_user.stdout }}/.asdf"
+#   register: asdf_stats
 
-- name: Clone asdf repo
-  git:
-    repo: https://github.com/asdf-vm/asdf.git
-    dest: "/home/{{ current_user.stdout }}/.asdf"
-    version: v0.14.1
-  when: asdf_stats.stat.exists == False
+# - name: Clone asdf repo
+#   git:
+#     repo: https://github.com/asdf-vm/asdf.git
+#     dest: "/home/{{ current_user.stdout }}/.asdf"
+#     version: v0.14.1
+#   when: asdf_stats.stat.exists == False
 
+- name: Install asdf and languages
+  vars:
+      asdf_version: v0.14.1
+      asdf_user: "{{ current_user.stdout }}"
+      asdf_plugins:
+        - name: rust
+        - name: nodejs
+          versions: ["latest"]
+          global: "latest"
