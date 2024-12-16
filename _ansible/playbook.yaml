@@ -22,7 +22,7 @@
     - include_tasks: tasks/02-nvim.yaml
     - include_tasks: tasks/03-zsh.yaml
     - include_tasks: tasks/04-wsl.yaml
-    - include_tasks: tasks/05-languages.yaml
+    - include_tasks: tasks/05-asdf.yaml
     - include_tasks: tasks/06-lsd-rs.yaml
 
     - include_tasks: tasks/99-dotfiles.yaml
